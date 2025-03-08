@@ -102,59 +102,6 @@ export default function Home() {
 
   const availablePersonalities = getPersonalitiesForProfession(profession);
 
-  const simulateDiscussion = async () => {
-    if (!problemStatement.trim()) {
-      alert('Please enter a problem statement');
-      return;
-    }
-
-    setIsDiscussing(true);
-    setParticipants((prev) => prev.map((p) => ({ ...p, messages: [], isThinking: false })));
-
-    try {
-      // Simulate responses from each participant in sequence
-      for (const participant of participants) {
-        if (!isDiscussingRef.current) break;
-
-        // Set thinking state
-        setParticipants((prev) =>
-          prev.map((p) => ({
-            ...p,
-            isThinking: p.personality === participant.personality,
-          }))
-        );
-
-        // Generate real response using ChatClient
-        const response = await ChatClient.generateResponse({
-          question: problemStatement,
-          personality: participant.personality,
-          provider: participant.llm.toLowerCase(), // Assuming LLM enum matches provider names
-        });
-
-        // Add response to messages
-        setParticipants((prev) =>
-          prev.map((p) => ({
-            ...p,
-            isThinking: false,
-            messages:
-              p.personality === participant.personality
-                ? [...(p.messages || []), ...(response ? [{ content: response.content, index: responseIndexRef.current }] : [])]
-                : p.messages,
-          }))
-        );
-
-        // Small delay between responses
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
-    } catch (error) {
-      console.error('Error during discussion:', error);
-      alert('An error occurred during the discussion');
-    } finally {
-      isDiscussingRef.current = false;
-      setIsDiscussing(false);
-    }
-  };
-
   // Add this near the top of the component with other refs
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
