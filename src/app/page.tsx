@@ -212,7 +212,7 @@ export default function Home() {
           <p className="text-white/80 text-lg">A council of AI experts discussing solutions from different perspectives</p>
           <p className="text-white/60 text-sm mt-2 max-w-2xl mx-auto">
             To get started: (1) Add your Anthropic API key in the settings dialog in the top-right corner, (2) Write your problem statement or
-            question in the box below, and (3) Click "Start Discussion" to begin the AI council's deliberation.
+            question in the box below, and (3) Click &quot;Start Discussion&quot; to begin the AI council&apos;s deliberation.
           </p>
           <div className="mt-4 flex flex-col justify-center items-center gap-4">
             <Select value={profession} onValueChange={(value) => setProfession(value as Profession)}>
