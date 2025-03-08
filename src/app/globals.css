@@ -2,20 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: none;
+    --foreground: hsl(215, 90%, 15%);
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 215 15% 85%;
+    --input: 215 15% 85%;
+    --ring: 215 100% 50%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: none;
+      --foreground: hsl(0, 0%, 100%);
+
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+ 
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+ 
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+ 
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+ 
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+ 
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+ 
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+ 
+      --border: 215 90% 25%;
+      --input: 215 90% 25%;
+      --ring: 45 90% 45%;
+    }
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-black overflow-x-hidden relative min-h-screen;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes colorRotate {
+  0% { background-color: rgba(238, 130, 238, 0.3); }  /* Violet */
+  14% { background-color: rgba(75, 0, 130, 0.3); }    /* Indigo */
+  28% { background-color: rgba(0, 0, 255, 0.3); }     /* Blue */
+  42% { background-color: rgba(0, 255, 0, 0.3); }     /* Green */
+  57% { background-color: rgba(255, 255, 0, 0.3); }   /* Yellow */
+  71% { background-color: rgba(255, 127, 0, 0.3); }   /* Orange */
+  85% { background-color: rgba(255, 0, 0, 0.3); }     /* Red */
+  100% { background-color: rgba(238, 130, 238, 0.3); } /* Back to Violet */
+}
+
+@keyframes thinkingGlow {
+  0%, 100% { 
+    color: rgba(147, 197, 253, 0.5);  /* blue-200 with reduced opacity */
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  }
+  50% { 
+    color: rgba(147, 197, 253, 1);    /* full opacity blue-200 */
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
+                 0 0 20px rgba(59, 130, 246, 0.5),
+                 0 0 30px rgba(59, 130, 246, 0.3);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90;
+  }
 }
