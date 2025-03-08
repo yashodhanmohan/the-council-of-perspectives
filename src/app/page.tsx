@@ -16,7 +16,6 @@ import {
 } from '@/lib/constants';
 import { useEffect, useState, useRef } from 'react';
 import { SettingsDialog } from '@/components/settings-dialog';
-import { ChatClient } from '@/lib/llm/chat-client';
 import { AnthropicClient } from '@/lib/llm/anthropic';
 import { LLMOrchestrator } from '@/lib/orchestration/llm-orchestrator';
 import ReactMarkdown from 'react-markdown';
@@ -37,7 +36,6 @@ export default function Home() {
   const [profession, setProfession] = useState<Profession>(Profession.ENGINEERING);
   const [problemStatement, setProblemStatement] = useState('');
   const [isDiscussing, setIsDiscussing] = useState(false);
-  const responseIndexRef = useRef(0);
   const isDiscussingRef = useRef(false);
   const [participants, setParticipants] = useState<Participant[]>([
     {
